@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Chip from "../../components/common/Chip";
 
 import Pagination from "../../components/common/Pagination";
 import { blogCardData } from "../../data/BlogCardData";
+import MuiChip from "../../components/common/MuiChip";
 
 const chips = [
   "SEO",
@@ -54,7 +54,7 @@ const BlogPage = () => {
       </div>
       <div className="flex justify-between gap-2 mt-5 ">
         {chips.map((item, index) => (
-          <Chip
+          <MuiChip
             isActive={index === activeIndx}
             onClick={() => clickHandler(index)}
             key={index}
