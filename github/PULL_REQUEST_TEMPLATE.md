@@ -15,3 +15,4 @@ Explain what this PR does.
 - [ ] No unnecessary files
 - [ ] PR is small and readable
 - [ ] All tests passed
+- [ ] Code follows best practices
