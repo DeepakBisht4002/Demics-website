@@ -1,7 +1,5 @@
-// components/FAQ.jsx
+import MuiAccordian from "../../common/MuiAccordian";
 
-import { useState } from "react";
-import Accordion from "../../common/Accordian";
 
 const faqData = [
   {
@@ -22,26 +20,20 @@ const faqData = [
     question: "What services do you offer?",
     answer:
       "We offer branding, digital marketing, SEO, social media management and more.",
-  }
+  },
 ];
 
-const FAQ = ({ data = faqData }) => {
-  const [openIndex, setOpenIndex] = useState(null);
-  const handleToggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+const FAQ = () => {
   return (
     <section className="w-full flex justify-center py-20">
       <div className="max-w-[800px] w-full px-5 md:px-0 text-white">
         <h2 className="text-4xl font-medium mb-10 text-left">FAQs</h2>
 
         <div className="space-y-4">
-          {data.map((item, index) => (
-            <Accordion
+          {faqData.map((item, index) => (
+            <MuiAccordian
               key={index}
-              index={index}
-              openIndex={openIndex}
-              onToggle={handleToggle}
+              id={index}
               question={item.question}
               answer={item.answer}
             />
