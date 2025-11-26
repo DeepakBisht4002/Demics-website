@@ -3,6 +3,16 @@ import { useState } from "react";
 import Pagination from "../../components/common/Pagination";
 import { blogCardData } from "../../data/BlogCardData";
 import MuiChip from "../../components/common/MuiChip";
+import MuiButton from "../../components/common/MuiButton";
+import MuiAccordian from "../../components/common/MuiAccordian";
+import FAQ from "../../components/sections/FAQ";
+import { Link } from "react-router-dom";
+import useForm from "../../hooks/useForm";
+import FormBuilder from "../../components/common/FormBuilder";
+import { contactusFormSchema } from "../../utils/schemas/ContactusSchema";
+import { blogFormSchema } from "../../utils/validation";
+import { Stack, TextField } from "@mui/material";
+import MuiInput from "../../components/common/MuiInput";
 
 const chips = [
   "SEO",
@@ -32,6 +42,12 @@ const BlogCard = ({ img, description }) => {
 };
 
 const BlogPage = () => {
+  const { values, handleChange, handleSubmit } = useForm({
+    name: "",
+    email: "",
+    message: "",
+  });
+
   const [currentPage, setCurrentPage] = useState(1);
   const [activeIndx, setActiveIndx] = useState(null);
   const itemsPerPage = 6;
@@ -64,18 +80,50 @@ const BlogPage = () => {
       </div>
       <div className="mt-5 grid grid-cols-1 md:grid-cols-2 place-items-center">
         {currentItems.map((item) => (
-          <BlogCard
-            key={item.id}
-            img={item.img}
-            description={item.description}
-          />
+          <Link key={item.id} to={`/blog/${item.id}`}>
+            <BlogCard img={item.img} description={item.description} />
+          </Link>
         ))}
       </div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
+
+      <section>
+        <div className="text-white">
+          <h1 className="text-4xl font-bold leading-tight">Interested in</h1>
+          <h1 className="text-4xl font-bold leading-tight">
+            Working Together?
+          </h1>
+        </div>
+        <div>
+          <FormBuilder
+            values={values}
+            schema={contactusFormSchema}
+            onChange={handleChange}
+            errors={blogFormSchema}
+          >
+            <Stack direction="row" gap={2}>
+              <MuiInput
+                label="Full Name*"
+                name="name"
+                onChange={handleChange}
+                value={values.name}
+              />
+              <MuiInput
+                label="Email*"
+                name="email"
+                onChange={handleChange}
+                value={values.email}
+              />
+            </Stack>
+            <MuiInput
+              label="Your message for us"
+              name="email"
+              onChange={handleChange}
+              value={values.email}
+            />
+            <MuiButton onClick={handleSubmit} label="Submit"/>
+          </FormBuilder>
+        </div>
+      </section>
     </div>
   );
 };
