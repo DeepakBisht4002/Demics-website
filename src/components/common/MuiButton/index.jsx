@@ -1,10 +1,11 @@
 import { Button } from "@mui/material";
 
-const MuiButton = ({label="Click Me",onClick}) => {
+const MuiButton = ({ label = "Click Me", onClick, type = "button" }) => {
   return (
     <>
       <Button
-       onClick={onClick}
+        type={type}
+        onClick={onClick}
         variant="contained"
         sx={{ background: "#8200FF", borderRadius: "70px" }}
       >

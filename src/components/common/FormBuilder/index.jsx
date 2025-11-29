@@ -2,8 +2,9 @@ import React from "react";
 
 const FormBuilder = ({ values, onChange, errors, children }) => {
   const enhancedChildren = React.Children.map(children, (child) => {
-    // if not a valid React element
     if (!React.isValidElement(child)) return child;
+
+    if (!child.props.name) return child;
 
     const name = child.props.name;
 
@@ -14,11 +15,11 @@ const FormBuilder = ({ values, onChange, errors, children }) => {
           target: { name, value: e.target.value },
         }),
       error: !!errors[name],
-      helperText: errors[name]
+      helperText: errors[name],
     });
   });
 
   return <div className="space-y-4">{enhancedChildren}</div>;
 };
 
-export default FormBuilder
+export default FormBuilder;
