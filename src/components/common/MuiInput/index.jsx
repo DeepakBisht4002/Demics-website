@@ -8,21 +8,25 @@ const MuiInput = ({
   multiline = false,
   rows = 1,
   placeholder = "",
+  variant = "standard",
+  type = "text", // default to text
   ...rest
 }) => {
   return (
     <div
       style={{
+        flex: 1,
         borderLeft: "1px solid #fff",
         borderTop: "1px solid #fff",
-        borderRadius: "8px",
-        padding: "12px",
-        marginBottom: "10px",
+        borderRadius: "5px",
+        marginBottom: "15px",
+        padding: "8px",
       }}
     >
       <TextField
+        type={type}
         fullWidth
-        variant=""
+        variant={variant}
         label={label}
         name={name}
         value={value}
@@ -30,30 +34,43 @@ const MuiInput = ({
         placeholder={placeholder}
         multiline={multiline}
         rows={rows}
-        InputProps={{
-          disableUnderline: true,
-        }}
         sx={{
+          "& input[type=number]::-webkit-inner-spin-button": {
+            WebkitAppearance: "none",
+            margin: 0,
+          },
+          "& input[type=number]::-webkit-outer-spin-button": {
+            WebkitAppearance: "none",
+            margin: 0,
+          },
+          "& input[type=number]": {
+            MozAppearance: "textfield",
+          },
           "& .MuiInputBase-input": {
             color: "#fff",
+            paddingTop: "12px",
+            paddingBottom: "8px",
           },
-
           "& .MuiInputLabel-root": {
             color: "#ccc",
+            top: "-4px",
           },
           "& .MuiInputLabel-root.Mui-focused": {
             color: "#fff",
+            top: "-4px",
           },
-
           "& .MuiInputBase-input::placeholder": {
             color: "#aaa",
             opacity: 1,
           },
-
-          // remove MUI's internal background
-          "& .MuiFilledInput-root": {
-            background: "transparent !important",
-            padding: 0, // important so wrapper padding works
+          "& .MuiInput-underline:before": {
+            borderBottomColor: "#fff",
+          },
+          "& .MuiInput-underline:hover:before": {
+            borderBottomColor: "#aaa",
+          },
+          "& .MuiInput-underline:after": {
+            borderBottomColor: "#8200FF",
           },
         }}
         {...rest}
